@@ -57,24 +57,36 @@ public:
             }
         }
     }
-
     int* crearEstacion(int tamano) {
-
-
         // Crear un nuevo arreglo dinámico
         int* arreglo = new int[tamano];
-
         cout << "Ingrese " << tamano << " valores para llenar el arreglo:" << endl;
         for (int i = 0; i < tamano; ++i) {
             cout << "Valor " << i + 1 << ": ";
             cin >> arreglo[i];
         }
+
+        return arreglo;
+    }
+    void apartadocrearestacion() {
+        int tamano;
+        cout << "Ingrese el tamaño del arreglo: ";
+        cin >> tamano;
+
+        int* miArreglo = crearEstacion(tamano);
+
         // Imprimir el arreglo dinámico
         cout << "Arreglo ingresado:" << endl;
         for (int i = 0; i < tamano; ++i) {
             cout << miArreglo[i] << " ";
         }
         cout << endl;
-        return arreglo;
-    }};
+
+        // Liberar la memoria asignada
+        delete[] miArreglo;
+    }
+};
+
+
+
 #endif // LINEAMETRO_H
