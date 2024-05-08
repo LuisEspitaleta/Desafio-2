@@ -13,7 +13,7 @@ LineaMetro::LineaMetro(const string& nombre, unsigned short int numEstaciones) :
 }
 
 //Getter y Setter
-const string LineaMetro::getName(){
+const string LineaMetro::getNombre(){
     return nombre;
 }
 const int LineaMetro::getNumEstaciones(){
@@ -39,7 +39,7 @@ int* crearEstacion(int tamano) {
 
     return arreglo;
 }
-
+/*
 void agregarEstacion(int* nuevoArreglo, int tamanoNuevoArreglo) {
     // Incrementa el tamaño del arreglo de tamaños
     int* nuevosTamanos = new int[numArreglos + 1];
@@ -66,11 +66,15 @@ void agregarEstacion(int* nuevoArreglo, int tamanoNuevoArreglo) {
 
 }
 
-~LineaMetro() {
+*/
+LineaMetro::~LineaMetro() {
+    /*
     // Liberar la memoria asignada
     for (int i = 0; i < numArreglos; ++i) {
         delete[] arregloDelineametro[i];
     }
     delete[] arregloDelineametro;
     delete[] tamanos;
+    */
 }
+

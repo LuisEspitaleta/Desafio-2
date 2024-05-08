@@ -2,7 +2,7 @@
 #define LINEAMETRO_H
 
 #include<string>
-#include "EstacionMetro.h""
+#include "EstacionMetro.h"
 
 using namespace std;
 
@@ -15,7 +15,7 @@ public: //Metodos
     LineaMetro(const string& nombre);
 
     //Getter y Setter
-    const string getName();
+    const string getNombre();
     const int getNumEstaciones();
 
     const void imprimirNombre();
@@ -36,7 +36,7 @@ public: //Metodos
 
 private:
     string nombre;
-    EstacionMetro* estacione[20];  // Puntero al arreglo de estaciones
+    EstacionMetro** estaciones; // Arreglo de arreglos dinámico;
     unsigned short int numEstaciones; // Número de estaciones en la línea de metro
 };
 

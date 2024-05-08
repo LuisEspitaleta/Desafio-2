@@ -1,54 +1,102 @@
+#include <string>
 #include <iostream>
+#include "RedMetro.h"
 #include "LineaMetro.h"
 
 using namespace std;
 
-class RedMetro {
-private:
-    string nombreRed;
-    LineaMetro** lineas;     // Arreglo dinámico de punteros a LineaMetro
-    unsigned short int numLineas;
-    int capacidad = 20;
-
-public:
     // Constructor que crea una red de metro con una línea predeterminada
-    RedMetro(const string& nombreRed) : nombreRed(nombreRed), numLineas(1) {
-        lineas = new LineaMetro*[numLineas];
+    RedMetro::RedMetro(const string& nombreRed) : nombreRed(nombreRed), numLineas(1) {
+        lineas = new LineaMetro*[1];
+        lineas[0] = new LineaMetro("Linea A");
     }
 
     // Constructor que crea una red de metro con el nombre y una cantidad inicial de líneas
-    RedMetro(const string& nombreRed, unsigned short int  numLineas) : nombreRed(nombreRed), numLineas(numLineas) {
+    RedMetro::RedMetro(const string& nombreRed, unsigned short int  numLineas) : nombreRed(nombreRed), numLineas(numLineas) {
         lineas = new LineaMetro*[numLineas];
-    }
-
-    // Método para agregar una línea al final del arreglo de líneas
-    void agregarLinea(const LineaMetro& nuevaLinea) {
-        if (numLineas < capacidad) {
-            lineas[numLineas++] = new LineaMetro(nuevaLinea);
-        } else {
-            // Implementar código para aumentar la capacidad del arreglo si es necesario
-            cout << "No se puede agregar más líneas. El arreglo está lleno." << std::endl;
+        char nombre = 'A';
+        for (int i = 0; i < numLineas; i++) {
+            lineas[i] = new LineaMetro("Linea " + string(1, nombre++));
         }
     }
 
-    void agregarLinea(const LineaMetro& nuevaLinea, int posicion) {
-        if (posicion >= 0 && posicion <= numLineas && numLineas < capacidad) {
-            // Desplazar las líneas existentes hacia la derecha para hacer espacio en la posición deseada
-            for (int i = numLineas; i > posicion; i--) {
-                lineas[i] = lineas[i - 1];
-            }
-            // Agregar la nueva línea en la posición especificada
-            lineas[posicion] = new LineaMetro(nuevaLinea);
-            numLineas++;
-        } else {
-            cout << "Posición inválida para agregar la línea." << std::endl;
-        }
+    const string RedMetro::getNombre(){
+        return nombreRed;
     }
 
-    ~RedMetro() {
-        // Liberar la memoria asignada a las líneas de metro
+    void RedMetro::setNombreRed(const string& nuevoNombre) {
+        nombreRed = nuevoNombre;
+    }
+
+    void RedMetro::setNumLineas(const unsigned short int& nuevoNumLineas) {
+        numLineas = nuevoNumLineas;
+    }
+
+    // Método para obtener una línea por índice
+    const string RedMetro::getNombreLinea(int index){
+        string nombreLinea = lineas[index]->getNombre();
+        return nombreLinea;
+    }
+
+    // Método para agregar una línea al final del arreglo líneas
+    void RedMetro::agregarLinea(const string& nombreLinea) {
+        int numLineasNuevo = numLineas+1;
+        LineaMetro** nuevoArreglo = new LineaMetro*[numLineasNuevo];
+        for (int i = 0; i < numLineas; i++) {
+            nuevoArreglo[i] = lineas[i];
+        }
+        delete[] lineas;
+        nuevoArreglo[numLineas] = new LineaMetro(nombreLinea);
+        lineas = nuevoArreglo;
+
+        setNumLineas(numLineasNuevo);
+    }
+
+
+    // Método para agregar una línea en la posición x del arreglo líneas
+    void RedMetro::agregarLinea(const string& nombreLinea, int posicion) {
+        if (posicion < 0 || posicion > numLineas) {
+            cout << "Posición inválida para agregar la línea." << endl;
+            return;
+        }
+
+        int numLineasNuevo = numLineas+1;
+        LineaMetro** nuevoArreglo = new LineaMetro*[numLineasNuevo];
+        for (int i = 0; i < numLineas; i++) {
+            nuevoArreglo[i] = lineas[i];
+        }
+        delete[] lineas;
+        lineas = nuevoArreglo;
+
+        for (int i = numLineas; i > posicion-1; i--) {
+            lineas[i] = lineas[i - 1];
+        }
+
+        nuevoArreglo[posicion] = new LineaMetro(nombreLinea);
+        lineas = nuevoArreglo;
+
+        setNumLineas(numLineasNuevo);
+    }
+    /*const int getNumEstaciones(){
+     *
+    }
+
+
+
+*/
+
+    int RedMetro::contarLineas() const {
+        return numLineas;
+    }
+
+/*
+
+
+    // Destructor
+    RedMetro::~RedMetro() {
         for (int i = 0; i < numLineas; i++) {
             delete lineas[i];
         }
+        delete[] lineas;
     }
-};
+*/
