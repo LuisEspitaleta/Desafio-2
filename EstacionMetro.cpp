@@ -1,11 +1,7 @@
 // EstacionMetro.cpp
+#include <string>
 #include "Header/EstacionMetro.h"
 
-#include <string>
-<<<<<<< Updated upstream
-#include "EstacionMetro.h"
-=======
->>>>>>> Stashed changes
 
 using namespace std;
 
