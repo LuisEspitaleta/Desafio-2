@@ -56,32 +56,96 @@ using namespace std;
     // Método para agregar una línea en la posición x del arreglo líneas
     void RedMetro::agregarLinea(const string& nombreLinea, int posicion) {
         if (posicion < 0 || posicion > numLineas) {
-            cout << "Posición inválida para agregar la línea." << endl;
-            return;
+            cout << "Posicion invalida para agregar la linea." << endl;
+        }else{
+            int numLineasNuevo = numLineas+1;
+            LineaMetro** nuevoArreglo = new LineaMetro*[numLineasNuevo];
+            for (int i = 0; i < numLineasNuevo; i++) {
+                if (i < posicion-1) {
+                    nuevoArreglo[i] = lineas[i];
+                } else if(i > posicion-1){
+                    nuevoArreglo[i] = lineas[i-1];
+                } else{
+                    nuevoArreglo[i] = new LineaMetro(nombreLinea);
+                }
+
+            }
+            delete[] lineas;
+            lineas = nuevoArreglo;
+            setNumLineas(numLineasNuevo);
         }
-
-        int numLineasNuevo = numLineas+1;
-        LineaMetro** nuevoArreglo = new LineaMetro*[numLineasNuevo];
-        for (int i = 0; i < numLineas; i++) {
-            nuevoArreglo[i] = lineas[i];
-        }
-        delete[] lineas;
-        lineas = nuevoArreglo;
-
-        for (int i = numLineas; i > posicion-1; i--) {
-            lineas[i] = lineas[i - 1];
-        }
-
-        nuevoArreglo[posicion] = new LineaMetro(nombreLinea);
-        lineas = nuevoArreglo;
-
-        setNumLineas(numLineasNuevo);
     }
+
+    // Método para eliminar una línea en la posición x del arreglo líneas
+    void RedMetro::eliminarLinea(const int posicion) {
+        if (posicion < 1 || posicion > numLineas) {
+            cout << "Posición inválida para eliminar la línea." << endl;
+        }else{
+            int numLineasNuevo = numLineas-1;
+            LineaMetro** nuevoArreglo = new LineaMetro*[numLineasNuevo];
+            for (int i = 0; i < numLineasNuevo; i++) {
+                if (i < (posicion-1)) {
+                    nuevoArreglo[i] = lineas[i];
+                } else {
+                    nuevoArreglo[i] = lineas[i+1];
+                }
+            }
+            delete[] lineas;
+            lineas = nuevoArreglo;
+            setNumLineas(numLineasNuevo);
+        }
+    }
+
+    // Método para eliminar una línea en la posición x del arreglo líneas
+    void RedMetro::eliminarLinea(const string& nombreLinea) {
+        bool nombreExiste = false;
+        int posicionNombre;
+        for (int i = 0; i < numLineas; i++) {
+            if (lineas[i]->getNombre() == nombreLinea) {
+                posicionNombre = i;
+                nombreExiste = true;
+            }
+        }
+        if (nombreExiste) {
+
+            cout << "posiciones del nombre: " << posicionNombre;
+            int numLineasNuevo = numLineas-1;
+            LineaMetro** nuevoArreglo = new LineaMetro*[numLineasNuevo];
+            for (int i = 0; i < numLineasNuevo; i++) {
+                if (i < posicionNombre) {
+                    nuevoArreglo[i] = lineas[i];
+                } else {
+                    nuevoArreglo[i] = lineas[i+1];
+                }
+            }
+            delete[] lineas;
+            lineas = nuevoArreglo;
+            setNumLineas(numLineasNuevo);
+        }else{
+            cout << "La linea con ese nombre no existe." << endl;
+        }
+    }
+
     /*const int getNumEstaciones(){
      *
     }
 
+    int RedMetro::contarEstacionesRed() const {
+        int totalEstaciones = 0;
+        for (int i = 0; i < numLineas; i++) {
+            totalEstaciones += lineas[i]->getNumEstaciones();
+        }
+        return totalEstaciones;
+    }
 
+    bool RedMetro::estacionPerteneceALinea(const string& nombreEstacion, const string& nombreLinea) const {
+        for (int i = 0; i < numLineas; i++) {
+            if (lineas[i]->getNombre() == nombreLinea) {
+                return lineas[i]->buscarEstacion(nombreEstacion);
+            }
+        }
+        return false;
+    }
 
 */
 

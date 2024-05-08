@@ -27,10 +27,11 @@ public:
     const string getNombreLinea(int index);
     void setNombreRed(const string& nuevoNombre);
     void setNumLineas(const unsigned short int& nuevoNumLineas);
-    void setLineas(LineaMetro** nuevasLineas, unsigned short int nuevoNumLineas);
+
     void agregarLinea(const string& nuevaLinea);
     void agregarLinea(const string& nuevaLinea, int posicion);
     void eliminarLinea(const string& nombreLinea);
+    void eliminarLinea(const int posicion);
     int contarLineas() const;
 
     // Métodos para gestionar estaciones en la red de metro

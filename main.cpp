@@ -63,6 +63,29 @@ int main()
         cout << "Linea " << (i + 1) << ": " << redMetro.getNombreLinea(i) << endl;
     }
 
+
+    int posicionLineaEliminar;
+    cout << "\nIngrese el nombre de la nueva linea a agregar con posicion: ";
+    cout << "\nElimina la posicion: ";
+    cin >> posicionLineaEliminar;
+    redMetro.eliminarLinea(posicionLineaEliminar);
+    cout << "\nNombre de las lineas actulizada en la red de metro \"" << redMetro.getNombre() << "\":" << endl;
+    cout << "Numero total de lineas: " << redMetro.contarLineas() << endl;
+    for (int i = 0; i < redMetro.contarLineas(); ++i) {
+        cout << "Linea " << (i + 1) << ": " << redMetro.getNombreLinea(i) << endl;
+    }
+
+    string nombreLineaEliminar;
+    cout << "\nIngrese el nombre de la nueva linea a agregar con posicion: ";
+    cout << "\nElimina la posicion: ";
+    cin.ignore();
+    getline(cin, nombreLineaEliminar);
+    redMetro.eliminarLinea(nombreLineaEliminar);
+    cout << "\nNombre de las lineas actulizada en la red de metro \"" << redMetro.getNombre() << "\":" << endl;
+    cout << "Numero total de lineas: " << redMetro.contarLineas() << endl;
+    for (int i = 0; i < redMetro.contarLineas(); ++i) {
+        cout << "Linea " << (i + 1) << ": " << redMetro.getNombreLinea(i) << endl;
+    }
     /*bool pertenece = redMetro.estacionPerteneceALinea(nombreEstacion, "Línea 1 de " + nombreRedMetro);
     if (pertenece) {
         cout << "La estación \"" << nombreEstacion << "\" pertenece a la primera línea." << endl;
