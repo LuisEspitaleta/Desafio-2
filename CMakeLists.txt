@@ -12,6 +12,8 @@ add_executable(Desafio-2 main.cpp
     EstacionMetro.cpp
     LineaMetro.cpp
     RedMetro.cpp
+    helpers.cpp
+    Header/herplers.h
 
 )
 
