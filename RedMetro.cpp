@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
-#include "RedMetro.h"
-#include "LineaMetro.h"
+#include "Header/RedMetro.h"
+#include "Header/LineaMetro.h"
 
 using namespace std;
 
