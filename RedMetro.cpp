@@ -28,7 +28,7 @@ using namespace std;
         return numLineas;
     }
 
-    void RedMetro::setNombreRed(const string& nuevoNombre) {
+    void RedMetro::setNombre(const string& nuevoNombre) {
         nombreRed = nuevoNombre;
     }
 
@@ -43,22 +43,21 @@ using namespace std;
     }
 
     // Método para agregar una línea al final del arreglo líneas
-    void RedMetro::agregarLinea(const string& nombreLinea) {
+    void RedMetro::agregarLinea(const string& nombreLineaNueva) {
         int numLineasNuevo = numLineas+1;
         LineaMetro** nuevoArreglo = new LineaMetro*[numLineasNuevo];
         for (int i = 0; i < numLineas; i++) {
             nuevoArreglo[i] = lineas[i];
         }
         delete[] lineas;
-        nuevoArreglo[numLineas] = new LineaMetro(nombreLinea);
+        nuevoArreglo[numLineas] = new LineaMetro(nombreLineaNueva);
         lineas = nuevoArreglo;
-
+        delete[] nuevoArreglo;
         setNumLineas(numLineasNuevo);
     }
 
-
     // Método para agregar una línea en la posición x del arreglo líneas
-    void RedMetro::agregarLinea(const string& nombreLinea, int posicion) {
+    void RedMetro::agregarLinea(const string& nombreLineaNueva, int posicion) {
         if (posicion < 0 || posicion > numLineas) {
             cout << "Posicion invalida para agregar la linea." << endl;
         }else{
@@ -70,7 +69,7 @@ using namespace std;
                 } else if(i > posicion-1){
                     nuevoArreglo[i] = lineas[i-1];
                 } else{
-                    nuevoArreglo[i] = new LineaMetro(nombreLinea);
+                    nuevoArreglo[i] = new LineaMetro(nombreLineaNueva);
                 }
 
             }
@@ -130,6 +129,7 @@ using namespace std;
         }
     }
 
+    /*
     int RedMetro::contarEstacionesRed() const {
         int totalEstaciones = 0;
         for (int i = 0; i < numLineas; ++i) {
@@ -137,14 +137,25 @@ using namespace std;
         }
         return totalEstaciones;
     }
+    */
+    /*
+    bool RedMetro::estacionPerteneceALinea(const string& nombreEstacion, const string& nombreLinea) const {
+        for (int i = 0; i < numLineas; i++) {
+            if (lineas[i]->getNombre() == nombreLinea) {
+                return lineas[i]->buscarEstacion(nombreEstacion);
+            }
+        }
+        return false;
+    }*/
 
 
 
     // Destructor
     RedMetro::~RedMetro() {
-        for (int i = 0; i < numLineas; i++) {
+        /*for (int i = 0; i < numLineas; i++) {
             delete lineas[i];
         }
         delete[] lineas;
+        */
     }
 

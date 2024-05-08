@@ -1,16 +1,16 @@
 // EstacionMetro.cpp
 
-#include <iostream>
 #include <string>
 #include "EstacionMetro.h"
 
 using namespace std;
 
-EstacionMetro::EstacionMetro(const string& nombre) : nombre(nombre) {
+EstacionMetro::EstacionMetro(const string& nombrEstacion) : nombrEstacion(nombrEstacion) {
     // Puedes agregar más implementaciones aquí si es necesario
 }
 
-const void EstacionMetro::getNombre() {
-    cout << "Estación: " << nombre << "\n";
+
+const string EstacionMetro::getNombre(){
+    return nombrEstacion;
 }
 

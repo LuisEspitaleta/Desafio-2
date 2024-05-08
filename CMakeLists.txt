@@ -6,12 +6,12 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(Desafio-2 main.cpp
-    LineaMetro.cpp
-    LineaMetro.h
-    RedMetro.cpp
-    EstacionMetro.h
+    Header/EstacionMetro.h
+    Header/LineaMetro.h
+    Header/RedMetro.h
     EstacionMetro.cpp
-    RedMetro.h
+    LineaMetro.cpp
+    RedMetro.cpp
 
 )
 

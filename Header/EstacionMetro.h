@@ -11,6 +11,7 @@ public:
 
     EstacionMetro(const string& nombre);
 
+
     // Destructor
     ~EstacionMetro(); // Declaración del destructor
     const string getNombre();

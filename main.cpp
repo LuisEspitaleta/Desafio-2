@@ -29,9 +29,9 @@ int main()
 
     // Mostrar resumen de la red de metro creada
     cout << "\nResumen de la red de metro \"" << redMetro.getNombre() << "\":" << endl;
-    cout << "Numero total de lineas: " << redMetro.contarLineas() << endl;
+    cout << "Numero total de lineas: " << redMetro.getLineas() << endl;
     cout << "\nNombre de las lineas guardadas en la red de metro \"" << redMetro.getNombre() << "\":" << endl;
-    for (int i = 0; i < redMetro.contarLineas(); ++i) {
+    for (int i = 0; i < redMetro.getLineas(); ++i) {
         cout << "Linea " << (i + 1) << ": " << redMetro.getNombreLinea(i) << endl;
     }
     //cout << "Número total de estaciones en la red: " << redMetro.contarEstacionesRed() << endl;
@@ -44,8 +44,8 @@ int main()
     redMetro.agregarLinea(nombreLineaNueva);
 
     cout << "\nNombre de las lineas actulizada en la red de metro \"" << redMetro.getNombre() << "\":" << endl;
-    cout << "Numero total de lineas: " << redMetro.contarLineas() << endl;
-    for (int i = 0; i < redMetro.contarLineas(); ++i) {
+    cout << "Numero total de lineas: " << redMetro.getLineas() << endl;
+    for (int i = 0; i < redMetro.getLineas(); ++i) {
         cout << "Linea " << (i + 1) << ": " << redMetro.getNombreLinea(i) << endl;
     }
 
@@ -58,8 +58,8 @@ int main()
     redMetro.agregarLinea(nombreLineaNueva, posicionLineaNueva);
 
     cout << "\nNombre de las lineas actulizada en la red de metro \"" << redMetro.getNombre() << "\":" << endl;
-    cout << "Numero total de lineas: " << redMetro.contarLineas() << endl;
-    for (int i = 0; i < redMetro.contarLineas(); ++i) {
+    cout << "Numero total de lineas: " << redMetro.getLineas() << endl;
+    for (int i = 0; i < redMetro.getLineas(); ++i) {
         cout << "Linea " << (i + 1) << ": " << redMetro.getNombreLinea(i) << endl;
     }
 
@@ -69,8 +69,8 @@ int main()
     cin >> posicionLineaEliminar;
     redMetro.eliminarLinea(posicionLineaEliminar);
     cout << "\nNombre de las lineas actulizada en la red de metro \"" << redMetro.getNombre() << "\":" << endl;
-    cout << "Numero total de lineas: " << redMetro.contarLineas() << endl;
-    for (int i = 0; i < redMetro.contarLineas(); ++i) {
+    cout << "Numero total de lineas: " << redMetro.getLineas() << endl;
+    for (int i = 0; i < redMetro.getLineas(); ++i) {
         cout << "Linea " << (i + 1) << ": " << redMetro.getNombreLinea(i) << endl;
     }
 
@@ -81,8 +81,8 @@ int main()
     getline(cin, nombreLineaEliminar);
     redMetro.eliminarLinea(nombreLineaEliminar);
     cout << "\nNombre de las lineas actulizada en la red de metro \"" << redMetro.getNombre() << "\":" << endl;
-    cout << "Numero total de lineas: " << redMetro.contarLineas() << endl;
-    for (int i = 0; i < redMetro.contarLineas(); ++i) {
+    cout << "Numero total de lineas: " << redMetro.getLineas() << endl;
+    for (int i = 0; i < redMetro.getLineas(); ++i) {
         cout << "Linea " << (i + 1) << ": " << redMetro.getNombreLinea(i) << endl;
     }
     /*bool pertenece = redMetro.estacionPerteneceALinea(nombreEstacion, "Línea 1 de " + nombreRedMetro);

@@ -21,169 +21,76 @@ LineaMetro::LineaMetro(const string& nombreLinea, unsigned short int  numEstacio
     }
 }
 
+const string LineaMetro::getNombre(){
 
-// Destructor
-LineaMetro::~LineaMetro() {
-    // Liberar la memoria asignada
+    return nombreLinea;
+}
+
+const int LineaMetro::getNumEstaciones(){
+    return numEstaciones;
+}
+
+void LineaMetro::setNombre(const string& nuevoNombre) {
+    nombreLinea = nuevoNombre;
+}
+
+void LineaMetro::setNumEstaciones(const unsigned short int& nuevoNumEstaciones) {
+    numEstaciones = nuevoNumEstaciones;
+}
+
+// Método para agregar una línea al final del arreglo líneas
+void LineaMetro::agregarEstacion(const string& nombreEstacionNueva) {
+    int numEstacionesNuevo = numEstaciones+1;
+    EstacionMetro** nuevoArreglo = new EstacionMetro*[numEstaciones];
+    for (int i = 0; i < numEstaciones; i++) {
+        nuevoArreglo[i] = estaciones[i];
+    }
     delete[] estaciones;
+    nuevoArreglo[numEstaciones] = new EstacionMetro(nombreEstacionNueva);
+    estaciones = nuevoArreglo;
+
+    setNumEstaciones(numEstacionesNuevo);
 }
 
-void LineaMetro::agregarEstacion(int* nuevoArreglo, int tamanoNuevoArreglo) {
-    // Incrementa el tamaño del arreglo de tamaños
-    int* nuevosTamanos = new int[numArreglos + 1];
-    for (int i = 0; i < numArreglos; ++i) {
-        nuevosTamanos[i] = tamanos[i];
-    }
-    nuevosTamanos[numArreglos] = tamanoNuevoArreglo;
 
-    // Incrementa el tamaño del arreglo de arreglos
-    int** nuevosArreglos = new int*[numArreglos + 1];
-    for (int i = 0; i < numArreglos; ++i) {
-        nuevosArreglos[i] = arregloDelineametro[i];
-    }
-    nuevosArreglos[numArreglos] = nuevoArreglo;
+// Método para agregar una línea en la posición x del arreglo líneas
+void LineaMetro::agregarEstacion(const string& nombreEstacionNueva, int posicion) {
+    if (posicion < 0 || posicion > numEstaciones) {
+        cout << "Posicion invalida para agregar la Estacion." << endl;
+    }else{
+        int numEstacionesNuevo = numEstaciones+1;
+        EstacionMetro** nuevoArreglo = new EstacionMetro*[numEstacionesNuevo];
+        for (int i = 0; i < numEstacionesNuevo; i++) {
+            if (i < posicion-1) {
+                nuevoArreglo[i] = estaciones[i];
+            } else if(i > posicion-1){
+                nuevoArreglo[i] = estaciones[i-1];
+            } else{
+                nuevoArreglo[i] = new EstacionMetro(nombreEstacionNueva);
+            }
 
-    // Libera la memoria del arreglo de tamaños y del arreglo de arreglos originales
-    delete[] tamanos;
-    delete[] arregloDelineametro;
-
-    // Asigna los nuevos arreglos y tamaños al arreglo de arreglos
-    tamanos = nuevosTamanos;
-    arregloDelineametro = nuevosArreglos;
-    numArreglos++;
-
-}
-void LineaMetro::agregarEstacion(int* nuevoArreglo, int tamanoNuevoArreglo, int posicion) {
-    // Verificar si la posición especificada es válida
-    if (posicion < 0 || posicion > numArreglos) {
-        cout << "Posición inválida. No existe el lugar donde quiere colocar su estacion" << endl;
-        return;
-    }
-
-    int* nuevosTamanos = new int[numArreglos + 1];
-    for (int i = 0; i < numArreglos; ++i) {
-        nuevosTamanos[i] = tamanos[i];
-    }
-    nuevosTamanos[numArreglos] = tamanoNuevoArreglo;
-
-    // sube el tamaño dd arreglo
-    int** nuevosArreglos = new int*[numArreglos + 1];
-
-    // Copiar los arreglos de estacion hasta la posición especifica deseada
-    for (int i = 0; i < posicion; ++i) {
-        nuevosArreglos[i] = arregloDelineametro[i];
-    }
-
-    // Agregar la nueva estacion en la posición especificada
-    nuevosArreglos[posicion] = nuevoArreglo;
-
-    // Copiar las estaciones ya existentes después de la posición especificada
-    for (int i = posicion; i < numArreglos; ++i) {
-        nuevosArreglos[i + 1] = arregloDelineametro[i];
-    }
-
-    // Libera la memoria del arreglo de tamaños y del arreglo de arreglos originales
-    delete[] tamanos;
-    delete[] arregloDelineametro;
-
-    // Asigna los nuevos arreglos y tamaños al arreglo de arreglos
-    tamanos = nuevosTamanos;
-    arregloDelineametro = nuevosArreglos;
-    numArreglos++;
-}
-void LineaMetro::borrarEstacion(int posicion) {
-    // Verificar si la posición especificada es válida
-    if (posicion < 0 || posicion >= numArreglos) {
-        cout << "Posición inválida. No se pudo borrar el arreglo." << endl;
-        return;
-    }
-
-    // Decrementar el tamaño del arreglo de tamaños
-    int* nuevosTamanos = new int[numArreglos - 1];
-    for (int i = 0, j = 0; i < numArreglos; ++i) {
-        if (i != posicion) {
-            nuevosTamanos[j++] = tamanos[i];
         }
-    }
-
-    // Decrementar el tamaño del arreglo de arreglos
-    int** nuevosArreglos = new int*[numArreglos - 1];
-
-    // Copiar los arreglos originales excepto el que se va a borrar
-    for (int i = 0, j = 0; i < numArreglos; ++i) {
-        if (i != posicion) {
-            nuevosArreglos[j++] = arregloDelineametro[i];
-        } else {
-            // Liberar la memoria del arreglo que se va a borrar
-            delete[] arregloDelineametro[i];
-        }
-    }
-
-    // Libera la memoria del arreglo de tamaños y del arreglo de arreglos originales
-    delete[] tamanos;
-    delete[] arregloDelineametro;
-
-    // Asigna los nuevos arreglos y tamaños al arreglo de arreglos
-    tamanos = nuevosTamanos;
-    arregloDelineametro = nuevosArreglos;
-    numArreglos--;
-}
-void LineaMetro::imprimirArregloDelineametro() {
-    cout << "Subarreglos almacenados en el arreglo de arreglos:" << endl;
-    for (int i = 0; i < numArreglos; ++i) {
-        for (int j = 0; j < tamanos[i]; ++j) {
-            cout << arregloDelineametro[i][j] << " ";
-        }
+        delete[] estaciones;
+        estaciones = nuevoArreglo;
+        setNumEstaciones(numEstacionesNuevo);
     }
 }
-/*int* crearEstacion(int tamano) {
-        // Crear un nuevo arreglo dinámico
-        int* arreglo = new int[tamano];
-        cout << "Ingrese " << tamano << " valores para llenar el arreglo:" << endl;
-        for (int i = 0; i < tamano; ++i) {
-            cout << "Valor vuelta " << i + 1 << ": ";
-            cin >> arreglo[i];
-            ++i;
-            cout << "Valor ida " << i + 1 << ": ";
-            cin >> arreglo[i];
+// Método para eliminar una línea en la posición x del arreglo líneas
+void LineaMetro::eliminarEstacion(const int posicion) {
+    if (posicion < 1 || posicion > numEstaciones) {
+        cout << "Posición inválida para eliminar la línea." << endl;
+    }else{
+        int numEstacionesNuevo = numEstaciones-1;
+        EstacionMetro** nuevoArreglo = new EstacionMetro*[numEstacionesNuevo];
+        for (int i = 0; i < numEstacionesNuevo; i++) {
+            if (i < (posicion-1)) {
+                nuevoArreglo[i] = estaciones[i];
+            } else {
+                nuevoArreglo[i] = estaciones[i+1];
+            }
         }
-
-        return arreglo;
-    }*/
-int* LineaMetro::apartadocrearestacion() {
-    int tamano;
-    tamano=2;
-    int* miArreglo = new int[tamano];
-    // Crear un nuevo arreglo dinámico
-    int* arreglo = new int[tamano];
-    cout << "Ingrese " << tamano << " valores para ajustar su estacion" << endl;
-    int i=0;
-    if(tamano==2){
-        cout << "Valor vuelta " << ": ";
-        cin >> arreglo[i];
+        delete[] estaciones;
+        estaciones = nuevoArreglo;
+        setNumEstaciones(numEstacionesNuevo);
     }
-    i++;
-    if(tamano==2){
-        cout << "Valor ida " << ": ";
-        cin >> arreglo[i];
-    }
-    // Imprimir el arreglo dinámico
-    cout << "distancia a la anterior estacion y siguiente, respectivamente:" << endl;
-    for (int i = 0; i < tamano; ++i) {
-        cout << miArreglo[i] << "--";
-    }
-    cout << endl;
-
-    // Liberar la memoria asignada
-    delete[] miArreglo;
-    return arreglo;
-}
-void menu(){
-    cout<<"Escoja entre las siguientes opciones"<<endl<<endl;
-    cout<<"1: Agregar enrutadores "<<endl;
-    cout<<"-- Eliminar enrutadores "<<endl;
-    cout<<"-- Modificar tabla de algun enrutador "<<endl;
-    cout<<"-- Saber cuanto cuesta envier un paquete a cierta ubicacion"<<endl;
-    cout<<"2: Saber el camino correcto para que un paquete llegue bien"<<endl;
-    cout<<"3: Salir del menu :"<<endl<<endl;
 }
