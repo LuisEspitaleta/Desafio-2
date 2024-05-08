@@ -18,7 +18,7 @@ public:
 private:
     string nombre;
     bool traferencia;
-    String lineas = new
+    //String lineas = new
 };
 
 #endif // ESTACIONMETRO_H
