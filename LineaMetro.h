@@ -8,6 +8,11 @@ using namespace std;
 
 class LineaMetro {
 
+private:
+    string nombreLinea;
+    EstacionMetro** estaciones; // Arreglo dinámico;
+    unsigned short int numEstaciones; // Número de estaciones en la línea de metro
+
 public: //Metodos
 
     //Constructores
@@ -29,15 +34,9 @@ public: //Metodos
     bool* buscarEstacion(string nombre, string nombreEstacion);
 
 
-
     // Destructor
     ~LineaMetro();
 
-
-private:
-    string nombre;
-    EstacionMetro** estaciones; // Arreglo de arreglos dinámico;
-    unsigned short int numEstaciones; // Número de estaciones en la línea de metro
 };
 
 

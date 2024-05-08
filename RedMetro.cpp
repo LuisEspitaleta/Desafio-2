@@ -24,6 +24,10 @@ using namespace std;
         return nombreRed;
     }
 
+    const int RedMetro::getLineas(){
+        return numLineas;
+    }
+
     void RedMetro::setNombreRed(const string& nuevoNombre) {
         nombreRed = nuevoNombre;
     }
@@ -126,34 +130,14 @@ using namespace std;
         }
     }
 
-    /*const int getNumEstaciones(){
-     *
-    }
-
     int RedMetro::contarEstacionesRed() const {
         int totalEstaciones = 0;
-        for (int i = 0; i < numLineas; i++) {
-            totalEstaciones += lineas[i]->getNumEstaciones();
+        for (int i = 0; i < numLineas; ++i) {
+            totalEstaciones += lineas[i]->contarEstaciones();
         }
         return totalEstaciones;
     }
 
-    bool RedMetro::estacionPerteneceALinea(const string& nombreEstacion, const string& nombreLinea) const {
-        for (int i = 0; i < numLineas; i++) {
-            if (lineas[i]->getNombre() == nombreLinea) {
-                return lineas[i]->buscarEstacion(nombreEstacion);
-            }
-        }
-        return false;
-    }
-
-*/
-
-    int RedMetro::contarLineas() const {
-        return numLineas;
-    }
-
-/*
 
 
     // Destructor
@@ -163,4 +147,4 @@ using namespace std;
         }
         delete[] lineas;
     }
-*/
+

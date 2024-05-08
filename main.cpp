@@ -63,7 +63,6 @@ int main()
         cout << "Linea " << (i + 1) << ": " << redMetro.getNombreLinea(i) << endl;
     }
 
-
     int posicionLineaEliminar;
     cout << "\nIngrese el nombre de la nueva linea a agregar con posicion: ";
     cout << "\nElimina la posicion: ";

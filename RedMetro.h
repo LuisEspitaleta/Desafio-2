@@ -5,6 +5,7 @@
 #include "LineaMetro.h"
 
 class RedMetro {
+
 private:
     string nombreRed; // Nombre de la red de metro
     LineaMetro** lineas; // Arreglo estático para almacenar hasta 10 líneas de metro
@@ -24,6 +25,7 @@ public:
 
     // Métodos para manipular líneas de metro
     const string getNombre();
+    const int getLineas();
     const string getNombreLinea(int index);
     void setNombreRed(const string& nuevoNombre);
     void setNumLineas(const unsigned short int& nuevoNumLineas);
@@ -32,11 +34,14 @@ public:
     void agregarLinea(const string& nuevaLinea, int posicion);
     void eliminarLinea(const string& nombreLinea);
     void eliminarLinea(const int posicion);
-    int contarLineas() const;
+
 
     // Métodos para gestionar estaciones en la red de metro
     int contarEstacionesRed() const;
     bool estacionPerteneceALinea(const string& nombreEstacion, const string& nombreLinea) const;
+
+    // Destructor
+    ~RedMetro();
 };
 
 #endif // REDMETRO_H

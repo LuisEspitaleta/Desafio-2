@@ -8,7 +8,9 @@ using namespace std;
 
 class EstacionMetro {
 public:
+
     EstacionMetro(const string& nombre);
+
 
     // Destructor
     ~EstacionMetro(); // Declaración del destructor
