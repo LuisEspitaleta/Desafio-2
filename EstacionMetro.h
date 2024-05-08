@@ -1,0 +1,4 @@
+#ifndef ESTACIONMETRO_H
+#define ESTACIONMETRO_H
+
+#endif // ESTACIONMETRO_H
