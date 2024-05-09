@@ -1,0 +1,61 @@
+int opcion;
+            do {
+                cout<<"Escoja entre las siguientes opciones"<<endl<<endl;
+                cout<<"1: Agregar estaciones "<<endl;
+                cout<<"2: Eliminar una estacion de una linea "<<endl;
+                cout<<"3: Saber cuantas lineas tiene una red metro "<<endl;
+                cout<<"4: Verificar si una estacion pertenece a cierta linea "<<endl;
+                cout<<"5: Agregar una nueva linea a la red metro"<<endl;
+                cout<<"6: Eliminar una linea de la red metro"<<endl;
+                cout<<"7: Saber cuantas estaciones tiene una red metro"<<endl;
+                cout<<"8: Salir del menu :"<<endl<<endl;
+
+                cout << "Ingrese su opcion: ";
+                cin >> opcion;
+
+                switch(opcion) {
+                case 1:{
+                    cout << "Ha elegido la opción 1: Agregar una estacion a una linea" << endl;
+                    cout<<"Escoja entre las siguientes opciones: "<<endl;
+                    cout<<"1. Convertir una estacion en estacion de transferencia "<<endl;
+                    cout<<"2. Agregar una estacion a una linea"<<endl;
+                    break;}
+                case 2:{
+                    cout << "Ha elegido la opción 2: Eliminar una estacion de una linea" << endl;
+                    cout<<"En que linea esta la estacion que desea eliminar : "<<endl;
+                    cout<<"Cual es el nombre de la linea que desea eliminar : "<<endl;
+                    cout<<"Se ha eliminado con exito :"<<endl;
+                    break;}
+                case 3:{
+                    cout << "Ha elegido la opción 3: Saber cuantas lineas tiene una red metro" << endl;
+                    cout<<"Estas son las lineas pertenecientes a su respectiva red metro :"<<endl;
+                    break;}
+                case 4:{
+                    cout << "Ha elegido la opción 4: Verificar si una estacion pertenece a cierta linea" << endl;
+                    cout<<"Ingrese el nombre de la estacion :"<<endl;
+                    cout<<"Ingrese el nombre de la linea donde quiere revisar "<<endl;
+                    break;}
+                case 5:{
+                    cout << "Ha elegido la opción 5: Agregar una nueva linea a la red metro" << endl;
+                    cout<<"En que lugar desea agregar su nueva linea :"<<endl;
+                    cout<<"¿A que estacion de trasferencia esta enlazada? :"<<endl;
+                    break;}
+                case 6:{
+                    cout << "Ha elegido la opción 6: Eliminar una linea de la red metro" << endl;
+                    cout<<"Que linea desea eliminar :"<<endl;
+                    cout<<"Primero se analizara si su linea contiene estaciones de transferencia"<<endl;
+                    break;}
+                case 7:{
+                    cout << "Ha elegido la opción 7: Saber cuantas estaciones tiene una red metro" << endl;
+                    cout<<"El numero de estaciones que contiene su red metro es :"<<endl;
+                    break;}
+                case 8:{
+                    cout << "Ha elegido la opción 8: Salir del menu. ¡Hasta luego!" << endl;
+                    
+                    break;}
+                default:
+                    cout << "Opción no válida. Por favor, elija una opción válida." << endl;
+                    break;
+                }
+            } while(opcion != 8);
+        }
