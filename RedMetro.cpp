@@ -36,6 +36,16 @@ using namespace std;
         numLineas = nuevoNumLineas;
     }
 
+    // Método para obtener una referencia a una línea específica por su índice
+    LineaMetro& RedMetro::getLinea(int index) {
+        if (index >= 0 && index < numLineas) {
+            return lineas[index];
+        } else {
+            static LineaMetro lineaVacia;  // Una línea "vacía" por defecto
+            return lineaVacia;
+        }
+    }
+
     // Método para obtener una línea por índice
     const string RedMetro::getNombreLinea(int index){
         string nombreLinea = lineas[index]->getNombre();
@@ -129,6 +139,16 @@ using namespace std;
         }
     }
 
+    
+    const bool RedMetro::estacionPerteneceALinea(const string& nombreLinea) {
+        for (int i = 0; i < numLineas; i++) {
+            if (lineas[i]->getNombre() == nombreLinea) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /*
     int RedMetro::contarEstacionesRed() const {
         int totalEstaciones = 0;
@@ -138,17 +158,7 @@ using namespace std;
         return totalEstaciones;
     }
     */
-    /*
-    bool RedMetro::estacionPerteneceALinea(const string& nombreEstacion, const string& nombreLinea) const {
-        for (int i = 0; i < numLineas; i++) {
-            if (lineas[i]->getNombre() == nombreLinea) {
-                return lineas[i]->buscarEstacion(nombreEstacion);
-            }
-        }
-        return false;
-    }*/
-
-
+    
 
     // Destructor
     RedMetro::~RedMetro() {

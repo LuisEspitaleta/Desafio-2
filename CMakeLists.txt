@@ -14,6 +14,8 @@ add_executable(Desafio-2 main.cpp
     RedMetro.cpp
     helpers.cpp
     Header/herplers.h
+    Header/MenuFuntions.h
+    MenuFuntions.cpp
 
 )
 

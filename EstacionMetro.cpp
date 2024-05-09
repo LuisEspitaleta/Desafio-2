@@ -35,7 +35,7 @@ using namespace std;
     }
 
     // Método de acceso (getter) para lineas
-    const string* EstacionMetro::getLineas() const {
+    const string* EstacionMetro::getLineas(){
         return lineas;
     }
 
