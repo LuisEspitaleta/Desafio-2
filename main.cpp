@@ -1,13 +1,11 @@
 #include <iostream>
 #include <string>
 #include "Header/RedMetro.h"
-#include "Header/MenuFuntions.h"
 
 using namespace std;
 
 int main()
 {
-
     string nombreRedMetro, nombreEstacion, nombreLinea, nombreLineaTransferencia;
     char crearMasLineas, esTransferencia;
     int cantidadLineas = 1, numTransferencia; // Por defecto, se crea al menos una línea
@@ -16,7 +14,7 @@ int main()
     // Solicitar nombre de la red de metro
     cout << "Ingrese el nombre de la red de metro: ";
     getline(cin, nombreRedMetro);
-    cout << nombreRedMetro << endl;
+
     // Preguntar si desea crear más de una línea de metro
     cout << "Desea crear mas de una linea de metro? (S/N): ";
     cin >> crearMasLineas;
@@ -54,17 +52,30 @@ int main()
         cin >> opcion;
 
         switch(opcion) {
-        case 1:{
+        case 1:
             cout << "Ha elegido la opción 1: Agregar una estacion de una linea" << endl;
             cout << "Cual es el nombre de la estacion a Crear: ";
             cin.ignore();
             getline(cin, nombreEstacion);
-            cout << "Cual es el nombre de la Linea donde se va agregrar: ";
-            cin.ignore();
+            lineExiste = false;
+            while (!lineExiste) {
+                cout << "Cual es el nombre de la Linea donde se va agregrar: ";
+                cin.clear();
+                getline(cin, nombreLinea);
+
+                // Verificar si la línea está presente en RedMetro
+                lineExiste = redMetro.existeLinea(nombreLinea);
+                cout << lineExiste << endl;
+                cout << nombreLinea << endl;
+                if (!lineExiste) {
+                    cout << "La linea '" << nombreLinea << "' no existe en RedMetro. Intente de nuevo." << endl;
+                }
+            }
             getline(cin, nombreLinea);
             cout << "Tiene transferencia? (S/N): ";
             cin >> esTransferencia;
-            if (esTransferencia == 'S'){
+            if (esTransferencia == 's'){
+                bool trans = true;
                 cout << "Cuanatas lineas pasan por la estacion: ";
                 cin >> numTransferencia;
                 string* arregloTransferencias[numTransferencia];
@@ -74,29 +85,37 @@ int main()
                     cout << "Nombre de la linea de transferencia "<< i <<": ";
                     cin.clear();
                     getline(cin, nombreLineaTransferencia);
-                    lineExiste = redMetro.estacionPerteneceALinea(nombreLineaTransferencia);
+                    lineExiste = redMetro.existeLinea(nombreLineaTransferencia);
+
                     if (lineExiste){
                         arregloTransferencias[i] = &nombreLineaTransferencia;
                     }
                     
                 }                
-            }
-
-            for (int i = 0; i < redMetro.getLineas(); ++i) {
-                if (nombreLinea == redMetro.getNombreLinea(i)){
-                    LineaMetro& linea = redMetro.getLinea(1);
-                    linea.agregarEstacion(nombreLinea);
-                }
-            }   
                 
-            void agregarEstacion();
+                for (int j = 0; j < numTransferencia; j++) {
+                    for (int i = 0; i < redMetro.getLineas(); ++i) {
+                        if (*arregloTransferencias[j] == redMetro.getNombreLinea(i)){
+                            LineaMetro& linea = redMetro.getLinea(i);
+
+                            linea.agregarEstacion(nombreEstacion, numTransferencia, *arregloTransferencias, trans);
+                        }
+                    }
+                }     
+            }
+                
+
         case 2:
             cout << "Ha elegido la opción 2: Eliminar una estacion de una linea" << endl;
             // Agregar aquí la lógica para la opción 2
             break;
         case 3:
-            cout << "Ha elegido la opción 3: Saber cuantas lineas tiene una red metro" << endl;
-            // Agregar aquí la lógica para la opción 3
+            cout << "Ha elegido la opción 3: Saber cuantas lineas tiene la red metro" << endl;
+            cout<<"La red metro tiene "<< redMetro.getLineas() <<" lines"<<endl;
+            cout<<"Estas son las lineas pertenecientes a su respectiva red metro :"<<endl;
+            for (int i = 0; i < redMetro.getLineas(); ++i) {
+                cout << "Linea " << (i + 1) << ": " << redMetro.getNombreLinea(i) << endl;
+            }
             break;
         case 4:
             cout << "Ha elegido la opción 4: Verificar si una estacion pertenece a cierta linea" << endl;

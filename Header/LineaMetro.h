@@ -16,6 +16,7 @@ private:
 public: //Metodos
 
     //Constructores
+    LineaMetro();
     LineaMetro(const string& nombreLinea);
     LineaMetro(const string& nombreLinea, unsigned short int numEstaciones);
 
@@ -29,6 +30,7 @@ public: //Metodos
 
     void agregarEstacion(const string& nombreEstacionNueva);
     void agregarEstacion(const string& nombreEstacionNueva, int posicion);
+    void agregarEstacion(const string& nombreEstacionNueva, int numTransferencia, string* arregloTransferencias, bool esTranferencia);
 
     void eliminarEstacion(const int posicion);
     bool* buscarEstacion(string nombre, string nombreEstacion);

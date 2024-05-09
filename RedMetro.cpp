@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
-#include "Header/RedMetro.h"
 #include "Header/LineaMetro.h"
+#include "Header/RedMetro.h"
 
 using namespace std;
 
@@ -39,7 +39,7 @@ using namespace std;
     // Método para obtener una referencia a una línea específica por su índice
     LineaMetro& RedMetro::getLinea(int index) {
         if (index >= 0 && index < numLineas) {
-            return lineas[index];
+            return *lineas[index];
         } else {
             static LineaMetro lineaVacia;  // Una línea "vacía" por defecto
             return lineaVacia;
@@ -139,8 +139,17 @@ using namespace std;
         }
     }
 
-    
-    const bool RedMetro::estacionPerteneceALinea(const string& nombreLinea) {
+    /*
+    const bool RedMetro::estacionPerteneceALinea(const string& nombreEstacion) {
+        for (int i = 0; i < numLineas; i++) {
+            if (lineas[i]->getNombre() == nombreEstacion) {
+                return true;
+            }
+        }
+        return false;
+    }*/
+
+    const bool RedMetro::existeLinea(const string& nombreLinea) {
         for (int i = 0; i < numLineas; i++) {
             if (lineas[i]->getNombre() == nombreLinea) {
                 return true;

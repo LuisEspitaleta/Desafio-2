@@ -29,7 +29,7 @@ public:
     const string getNombreLinea(int index);
     void setNombre(const string& nuevoNombre);
     void setNumLineas(const unsigned short int& nuevoNumLineas);
-    LineaMetro& RedMetro::getLinea(int indice);
+    LineaMetro& getLinea(int indice);
     void agregarLinea(const string& nuevaLinea);
     void agregarLinea(const string& nuevaLinea, int posicion);
     void eliminarLinea(const string& nombreLinea);
@@ -38,7 +38,8 @@ public:
 
     // Métodos para gestionar estaciones en la red de metro
     int contarEstacionesRed() const;
-    const bool RedMetro::estacionPerteneceALinea(const string& nombreLinea);
+    //const bool estacionPerteneceALinea(const string& nombreLinea);
+    const bool existeLinea(const string& nombreLinea);
 
     // Destructor
     ~RedMetro();

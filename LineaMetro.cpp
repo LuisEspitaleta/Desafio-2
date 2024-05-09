@@ -7,6 +7,7 @@
 using namespace std;
 
 // Constructor que crea una linea de metro con dos estaciones predeterminadas
+LineaMetro::LineaMetro(){}
 LineaMetro::LineaMetro(const string& nombreLinea) : nombreLinea(nombreLinea), numEstaciones(2) {
     estaciones = new EstacionMetro*[numEstaciones];
     estaciones[0] = new EstacionMetro("Estacion 1");
@@ -47,6 +48,19 @@ void LineaMetro::agregarEstacion(const string& nombreEstacionNueva) {
     }
     delete[] estaciones;
     nuevoArreglo[numEstaciones] = new EstacionMetro(nombreEstacionNueva);
+    estaciones = nuevoArreglo;
+
+    setNumEstaciones(numEstacionesNuevo);
+}
+
+void LineaMetro::agregarEstacion(const string& nombreEstacionNueva, int numTransferencia, string* arregloTransferencias, bool esTranferencia) {
+    int numEstacionesNuevo = numEstaciones+1;
+    EstacionMetro** nuevoArreglo = new EstacionMetro*[numEstaciones];
+    for (int i = 0; i < numEstaciones; i++) {
+        nuevoArreglo[i] = estaciones[i];
+    }
+    delete[] estaciones;
+    nuevoArreglo[numEstaciones] = new EstacionMetro(nombreEstacionNueva, numTransferencia, arregloTransferencias, esTranferencia);
     estaciones = nuevoArreglo;
 
     setNumEstaciones(numEstacionesNuevo);
@@ -93,4 +107,8 @@ void LineaMetro::eliminarEstacion(const int posicion) {
         estaciones = nuevoArreglo;
         setNumEstaciones(numEstacionesNuevo);
     }
+}
+
+LineaMetro::~LineaMetro() {
+
 }
