@@ -11,6 +11,10 @@ using namespace std;
 
     }
 
+    EstacionMetro::EstacionMetro(const string& nombrEstacion, int numTranferencias, string* lineas, bool esTransferencia) : nombrEstacion(nombrEstacion), numTranferencias(numTranferencias), lineas(lineas), esTransferencia(esTransferencia){
+
+    }
+
     // Destructor
     EstacionMetro::~EstacionMetro(){
     }
@@ -27,15 +31,15 @@ using namespace std;
 
     // Métodos de acceso (getters) y modificación (setter) para traferencia
     const bool EstacionMetro::tieneTransferencia()  {
-        return traferencia;
+        return esTransferencia;
     }
 
     void EstacionMetro::setTieneTransferencia(bool tiene) {
-        traferencia = tiene;
+        esTransferencia = tiene;
     }
 
     // Método de acceso (getter) para lineas
-    const string* EstacionMetro::getLineas() const {
+    const string* EstacionMetro::getLineas(){
         return lineas;
     }
 
@@ -53,9 +57,9 @@ using namespace std;
     }
 
     // Métodos de acceso (getters) y modificación (setter) para tiempos
-    const int** EstacionMetro::getTiempos() {
+    /*const int** EstacionMetro::getTiempos() {
         return tiempos;
-    }
+    }*/
 
     void EstacionMetro::setTiempos(int** nuevosTiempos, int filas, int columnas) {
         // Suponemos que filas y columnas son las dimensiones del nuevo arreglo 2D de tiempos

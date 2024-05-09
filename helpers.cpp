@@ -1,4 +1,4 @@
-int sumarSegundos() {
+/*int sumarSegundos() {
     int suma = 0;
     for (int i = 0; i < numArreglos; ++i) {
         // Verificar que haya al menos dos elementos en el subarreglo
@@ -8,3 +8,4 @@ int sumarSegundos() {
     }
     return suma;
 }
+*/

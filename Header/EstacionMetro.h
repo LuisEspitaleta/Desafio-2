@@ -10,7 +10,9 @@ class EstacionMetro {
     public:
 
         // Constructor
+        EstacionMetro();
         EstacionMetro(const string& nombrEstacion);
+        EstacionMetro(const string& nombrEstacion, int numTranferencias, string* lineas, bool esTransferencia);
 
         // Destructor
         ~EstacionMetro();
@@ -40,9 +42,9 @@ class EstacionMetro {
 
     private:
         string nombrEstacion;
-        bool traferencia;
+        bool esTransferencia;
         string* lineas;
-        int* numTranferencias;
+        int numTranferencias;
         int** tiempos;
 };
 

@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
-#include "Header/RedMetro.h"
 #include "Header/LineaMetro.h"
+#include "Header/RedMetro.h"
 
 using namespace std;
 
@@ -34,6 +34,16 @@ using namespace std;
 
     void RedMetro::setNumLineas(const unsigned short int& nuevoNumLineas) {
         numLineas = nuevoNumLineas;
+    }
+
+    // Método para obtener una referencia a una línea específica por su índice
+    LineaMetro& RedMetro::getLinea(int index) {
+        if (index >= 0 && index < numLineas) {
+            return *lineas[index];
+        } else {
+            static LineaMetro lineaVacia;  // Una línea "vacía" por defecto
+            return lineaVacia;
+        }
     }
 
     // Método para obtener una línea por índice
@@ -130,6 +140,25 @@ using namespace std;
     }
 
     /*
+    const bool RedMetro::estacionPerteneceALinea(const string& nombreEstacion) {
+        for (int i = 0; i < numLineas; i++) {
+            if (lineas[i]->getNombre() == nombreEstacion) {
+                return true;
+            }
+        }
+        return false;
+    }*/
+
+    const bool RedMetro::existeLinea(const string& nombreLinea) {
+        for (int i = 0; i < numLineas; i++) {
+            if (lineas[i]->getNombre() == nombreLinea) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*
     int RedMetro::contarEstacionesRed() const {
         int totalEstaciones = 0;
         for (int i = 0; i < numLineas; ++i) {
@@ -138,17 +167,7 @@ using namespace std;
         return totalEstaciones;
     }
     */
-    /*
-    bool RedMetro::estacionPerteneceALinea(const string& nombreEstacion, const string& nombreLinea) const {
-        for (int i = 0; i < numLineas; i++) {
-            if (lineas[i]->getNombre() == nombreLinea) {
-                return lineas[i]->buscarEstacion(nombreEstacion);
-            }
-        }
-        return false;
-    }*/
-
-
+    
 
     // Destructor
     RedMetro::~RedMetro() {
