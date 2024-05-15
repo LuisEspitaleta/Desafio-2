@@ -106,6 +106,7 @@ using namespace std;
             delete[] lineas;
             lineas = nuevoArreglo;
             setNumLineas(numLineasNuevo);
+            cout << "La linea se elimino correctamente." << endl;
         }
     }
 
@@ -115,13 +116,20 @@ using namespace std;
         int posicionNombre;
         for (int i = 0; i < numLineas; i++) {
             if (lineas[i]->getNombre() == nombreLinea) {
-                posicionNombre = i;
-                nombreExiste = true;
+                for (int j = 0; j < lineas[i]->getNumEstaciones(); j++) {                    
+                    if (lineas[i]->getVerificarTranferencia(i)) {
+                        nombreExiste = true;
+                        break;
+                    }else{
+                        cout << "La linea con ese nombre tiene transferencia no se puedo eliminar." << endl;
+                        break;
+                    }
+                }
+                
+                posicionNombre = i;                
             }
         }
         if (nombreExiste) {
-
-            cout << "posiciones del nombre: " << posicionNombre;
             int numLineasNuevo = numLineas-1;
             LineaMetro** nuevoArreglo = new LineaMetro*[numLineasNuevo];
             for (int i = 0; i < numLineasNuevo; i++) {
@@ -134,8 +142,7 @@ using namespace std;
             delete[] lineas;
             lineas = nuevoArreglo;
             setNumLineas(numLineasNuevo);
-        }else{
-            cout << "La linea con ese nombre no existe." << endl;
+            cout << "La linea se elimino correctamente." << endl;
         }
     }
 

@@ -6,9 +6,10 @@
 using namespace std;
 
     // Constructor
+    EstacionMetro::EstacionMetro(){}
     EstacionMetro::EstacionMetro(const string& nombrEstacion) : nombrEstacion(nombrEstacion), numTranferencias(0){
         lineas = new string[1];
-
+        esTransferencia = false;
     }
 
     EstacionMetro::EstacionMetro(const string& nombrEstacion, int numTranferencias, string* lineas, bool esTransferencia) : nombrEstacion(nombrEstacion), numTranferencias(numTranferencias), lineas(lineas), esTransferencia(esTransferencia){
@@ -23,6 +24,7 @@ using namespace std;
     const string EstacionMetro::getNombreEstacion()  {
         return nombrEstacion;
     }
+
 
     // Método de modificación (setter) para nombrEstacion
     void EstacionMetro::setNombreEstacion(const string& nombrNuevoEstacion) {
@@ -72,4 +74,3 @@ using namespace std;
             }
         }
     }
-

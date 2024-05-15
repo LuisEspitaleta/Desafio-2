@@ -27,11 +27,13 @@ public: //Metodos
     void setNumEstaciones(const unsigned short int& nuevoNumEstaciones);
     const void imprimirNombre();
     const void imrprimiNumEstaciones();
-
+    EstacionMetro& getEstacion(int indice);
+    const string getNombreEstacion(int index);
+    const bool getVerificarTranferencia(int index);
     void agregarEstacion(const string& nombreEstacionNueva);
     void agregarEstacion(const string& nombreEstacionNueva, int posicion);
     void agregarEstacion(const string& nombreEstacionNueva, int numTransferencia, string* arregloTransferencias, bool esTranferencia);
-
+    const bool existeEstacion(const string& nombreEstacion);
     void eliminarEstacion(const int posicion);
     bool* buscarEstacion(string nombre, string nombreEstacion);
 

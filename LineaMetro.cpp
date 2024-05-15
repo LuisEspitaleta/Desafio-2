@@ -23,7 +23,6 @@ LineaMetro::LineaMetro(const string& nombreLinea, unsigned short int  numEstacio
 }
 
 const string LineaMetro::getNombre(){
-
     return nombreLinea;
 }
 
@@ -37,6 +36,26 @@ void LineaMetro::setNombre(const string& nuevoNombre) {
 
 void LineaMetro::setNumEstaciones(const unsigned short int& nuevoNumEstaciones) {
     numEstaciones = nuevoNumEstaciones;
+}
+
+// Método para obtener una referencia a una línea específica por su índice
+EstacionMetro& LineaMetro::getEstacion(int index) {
+    if (index >= 0 && index < numEstaciones) {
+        return *estaciones[index];
+    } else {
+        static EstacionMetro estacionVacia;  // Una línea "vacía" por defecto
+        return estacionVacia;
+    }
+}
+
+const string LineaMetro::getNombreEstacion(int index){
+    string nombreEstacion = estaciones[index]->getNombreEstacion();
+    return nombreEstacion;
+}
+
+const bool LineaMetro::getVerificarTranferencia(int index){
+    bool siTiene = estaciones[index]->tieneTransferencia();
+    return siTiene;
 }
 
 // Método para agregar una línea al final del arreglo líneas
@@ -59,7 +78,6 @@ void LineaMetro::agregarEstacion(const string& nombreEstacionNueva, int numTrans
     for (int i = 0; i < numEstaciones; i++) {
         nuevoArreglo[i] = estaciones[i];
     }
-    delete[] estaciones;
     nuevoArreglo[numEstaciones] = new EstacionMetro(nombreEstacionNueva, numTransferencia, arregloTransferencias, esTranferencia);
     estaciones = nuevoArreglo;
 
@@ -107,6 +125,15 @@ void LineaMetro::eliminarEstacion(const int posicion) {
         estaciones = nuevoArreglo;
         setNumEstaciones(numEstacionesNuevo);
     }
+}
+
+const bool LineaMetro::existeEstacion(const string& nombreEstacion) {
+    for (int i = 0; i < numEstaciones; i++) {
+        if (estaciones[i]->getNombreEstacion() == nombreEstacion) {
+            return true;
+        }
+    }
+    return false;
 }
 
 LineaMetro::~LineaMetro() {
