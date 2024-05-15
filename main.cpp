@@ -75,7 +75,7 @@ int main()
 
             cout << "Tiene transferencia? (S/N): ";
             cin >> esTransferencia;
-            if (esTransferencia == 's'){
+            if (esTransferencia == 's' || esTransferencia == 'S'){
                 bool trans = true;
                 cout << "Cuantas lineas pasan por la estacion: ";
                 cin >> numTransferencia;
@@ -95,7 +95,6 @@ int main()
                 }
                 cout <<numTransferencia  << endl;
                 for (int j = 0; j < numTransferencia; j++) {
-                    cout <<numTransferencia<< " " << j << endl;
                     for (int k = 0; k < redMetro.getLineas(); k++) {
                         if (*arregloTransferencias[j] == redMetro.getNombreLinea(k)){
                             linea = &redMetro.getLinea(k);
@@ -104,31 +103,48 @@ int main()
                             for (int i = 0; i < linea->getNumEstaciones(); i++) {
                                 cout << "Linea " << (i + 1) << ": " << linea->getNombreEstacion(i) << endl;
                             }
-                            if (k == 0) {
-                                lineaImprimir = &redMetro.getLinea(k);
-                            }
                             break;
                         }
+                    }
+                }
+            }else if(esTransferencia == 'n' || esTransferencia == 'N'){
+                string* arregloTransferencias[1];
+                arregloTransferencias[0] =  new string(nombreLinea);
+                for (int k = 0; k < redMetro.getLineas(); k++) {
+                    if (*arregloTransferencias[0] == redMetro.getNombreLinea(k)){
+                        linea = &redMetro.getLinea(k);
+                        linea->agregarEstacion(nombreEstacion);
+                        cout << "Estaciones actuales de la Linea " << linea->getNombre() << endl;
+                        for (int i = 0; i < linea->getNumEstaciones(); i++) {
+                            cout << "Linea " << (i + 1) << ": " << linea->getNombreEstacion(i) << endl;
+                        }
+                        break;
                     }
                 }
             }
             break;
         case 2:
             cout << "Ha elegido la opcion 2: Eliminar una estacion de una linea" << endl;
-            cout << "Cual es el nombre de la Linea que se va a Eliminar: ";  
+            cout<<"Ingrese el nombre de la estacion a eliminar: ";
             cin.ignore();
-            cin.clear();
-            getline(cin, nombreLinea);       
-            lineExiste = redMetro.existeLinea(nombreLinea);
-            if (lineExiste){
-                for (int i = 0; i < redMetro.getLineas(); i++){                
-                    if (nombreLinea == redMetro.getNombreLinea(i)){
-                        redMetro.eliminarLinea(nombreLinea);
+            getline(cin, nombreEstacion);
+            cout<<"Ingrese el nombre de la linea donde quiere Eliminar la estacion: ";
+            getline(cin, nombreLinea);
+            for (int i = 0; i < redMetro.getLineas(); ++i) {
+               cout<< "comparando " << nombreLinea << " con " << redMetro.getNombreLinea(i) << endl;
+                if (nombreLinea == redMetro.getNombreLinea(i)){
+                   cout<< "entro" << endl;
+                   linea = &redMetro.getLinea(i);
+                    estacionExiste = linea->existeEstacion(nombreEstacion);
+                    cout<< "comparando debe ser 1:" << estacionExiste << endl;
+                    if(estacionExiste) {
+                        cout<< "Si es 1 entra:" << estacionExiste << endl;
+                        linea->eliminarEstacion(nombreEstacion);
+                    }else{
+                        cout << "La estacion " << nombreEstacion << " No es una parada de la linea " << nombreLinea << endl;
                     }
-                    
+                    break;
                 }
-            }{
-              cout << "La Linea que se va a Eliminar no existe\n\n" << endl;
             }
             break;
         case 3:
@@ -180,7 +196,7 @@ int main()
                     // Aqui se agrega la linea con posicion
                     redMetro.agregarLinea(nombreLinea, posicion);
                     
-                } else {
+                } else if(opcion == 'N' || opcion == 'n') {
                     // Si no se desea especificar la posicion
                     cout << "Nombre de la linea que desea agregar: ";
                     getline(cin, nombreLinea);
@@ -188,6 +204,8 @@ int main()
                     // Aqui se agrega la linea sin posicion
                     redMetro.agregarLinea(nombreLinea);
                     cout << "Se ha agregado la linea '" << nombreLinea << "' correctamente." << endl;
+                } else {
+                    cout << "No escogio S o N" << endl;
                 }
                 
                 cout << "\nNombre de las lineas actulizada en la red de metro \"" << redMetro.getNombre() << "\":" << endl;

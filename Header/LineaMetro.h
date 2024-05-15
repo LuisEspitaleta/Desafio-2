@@ -35,6 +35,7 @@ public: //Metodos
     void agregarEstacion(const string& nombreEstacionNueva, int numTransferencia, string* arregloTransferencias, bool esTranferencia);
     const bool existeEstacion(const string& nombreEstacion);
     void eliminarEstacion(const int posicion);
+    void eliminarEstacion(const string& nombreEstacion);
     bool* buscarEstacion(string nombre, string nombreEstacion);
 
 

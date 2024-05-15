@@ -127,6 +127,39 @@ void LineaMetro::eliminarEstacion(const int posicion) {
     }
 }
 
+void LineaMetro::eliminarEstacion(const string& nombreEstacion) {
+    bool nombreExiste = false;
+    int posicionNombre;
+    cout << nombreEstacion << endl;
+    for (int i = 0; i < numEstaciones; i++) {
+        if (estaciones[i]->getNombreEstacion() == nombreEstacion) {
+            if (estaciones[i]->tieneTransferencia()) {
+                    cout << "La Estacion con ese nombre tiene transferencia no se puedo eliminar." << endl;
+                    break;
+                }else{
+                    nombreExiste = true;
+                    break;
+                }
+            posicionNombre = i;
+        }
+    }
+    if (nombreExiste) {
+        int numEstacionesNuevo = numEstaciones-1;
+        EstacionMetro** nuevoArreglo = new EstacionMetro*[numEstacionesNuevo];
+        for (int i = 0; i < numEstacionesNuevo; i++) {
+            if (i < posicionNombre) {
+                nuevoArreglo[i] = estaciones[i];
+            } else {
+                nuevoArreglo[i] = estaciones[i+1];
+            }
+        }
+        delete[] estaciones;
+        estaciones = nuevoArreglo;
+        setNumEstaciones(numEstacionesNuevo);
+        cout << "La linea se elimino correctamente." << endl;
+    }
+}
+
 const bool LineaMetro::existeEstacion(const string& nombreEstacion) {
     for (int i = 0; i < numEstaciones; i++) {
         if (estaciones[i]->getNombreEstacion() == nombreEstacion) {
