@@ -131,14 +131,11 @@ int main()
             cout<<"Ingrese el nombre de la linea donde quiere Eliminar la estacion: ";
             getline(cin, nombreLinea);
             for (int i = 0; i < redMetro.getLineas(); ++i) {
-               cout<< "comparando " << nombreLinea << " con " << redMetro.getNombreLinea(i) << endl;
-                if (nombreLinea == redMetro.getNombreLinea(i)){
-                   cout<< "entro" << endl;
+                string noombreAcomparar = redMetro.getNombreLinea(i);
+                if (nombreLinea == noombreAcomparar){
                    linea = &redMetro.getLinea(i);
                     estacionExiste = linea->existeEstacion(nombreEstacion);
-                    cout<< "comparando debe ser 1:" << estacionExiste << endl;
                     if(estacionExiste) {
-                        cout<< "Si es 1 entra:" << estacionExiste << endl;
                         linea->eliminarEstacion(nombreEstacion);
                     }else{
                         cout << "La estacion " << nombreEstacion << " No es una parada de la linea " << nombreLinea << endl;
@@ -231,6 +228,23 @@ int main()
             break;
         case 7:
             cout << "Ha elegido la opcion 7: Saber cuantas estaciones tiene una red metro" << endl;
+            int contador = 1;
+            string* estacionesGuardadas = new string[redMetro.getLineas()];
+            for (int i = 0; i < redMetro.getLineas(); i++) {
+                for (int k = 0; k < redMetro.getLinea(i).getNumEstaciones(); k++) {
+                    redMetro.getLinea(k);
+                }
+            }
+
+            if (*esTransferencia[j] == redMetro.getNombreLinea(k)){
+                linea = &redMetro.getLinea(k);
+                linea->agregarEstacion(nombreEstacion, numTransferencia, *arregloTransferencias, trans);
+                cout << "Estaciones actuales de la Linea " << linea->getNombre() << endl;
+                for (int i = 0; i < linea->getNumEstaciones(); i++) {
+                    cout << "Linea " << (i + 1) << ": " << linea->getNombreEstacion(i) << endl;
+                }
+                break;
+            }
             // Agregar aqui la logica para la opcion 7
             break;
         case 8:
